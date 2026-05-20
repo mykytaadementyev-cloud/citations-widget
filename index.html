@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Citation Metrics</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+    }
+
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      max-width: 300px;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="card">
+  <h2>Research Metrics</h2>
+  <div id="citations">Loading citation count...</div>
+</div>
+
+<script>
+fetch("https://api.semanticscholar.org/graph/v1/author/101293651?fields=name,citationCount,paperCount")
+.then(response => response.json())
+.then(data => {
+    document.getElementById("citations").innerHTML =
+    `
+    <p><strong>Total Citations:</strong> ${data.citationCount}</p>
+    <p><strong>Publications:</strong> ${data.paperCount}</p>
+    `;
+});
+</script>
+
+</body>
+</html>
